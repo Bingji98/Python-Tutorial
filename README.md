@@ -13,6 +13,7 @@ Blow is an example of enclosing scope:
 *note: when you really want to change enclosing variable, use the **nonlocal** key word*
 
 ```python
+x = "global x"
 def outer():
     x = "outer x"
 
@@ -20,22 +21,18 @@ def outer():
         x = "inner x"
         print(x)
 
-    def inner2():
-        print(x)
-
     inner1()
-    inner2()
     print(x)
 
 outer()
+print(x)
 ```
 
 >inner x
 >
 >outer x
 >
->outer x
-
+>global x
 
 It is worth noting that the variable explicitly declared as the global variable is not necessarily declared at the module level. However, this way is *not recommended*.
 
