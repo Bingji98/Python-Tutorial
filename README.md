@@ -4,7 +4,7 @@
 # Table of Contents
 1. [Comparison Oerators](#co)
 2. [LEGB](#LEGB)
-3. [Private Methods(#pm)
+3. [Private Methods](#pm)
 
 
 ## Comparison operators <a name="co"></a>
