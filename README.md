@@ -16,6 +16,7 @@ Operator **\>** is **NOT** limited to comparisons between int/float.
 [10,5]<[6,20,30] # True, 6>20
 [3,100,[5,6]]<[3,4,6] # False, 100>4
 [1,2,[5,6]]<[1,2,6] # typeError: '<' not supported between instances of 'list' and 'int'
+5 > 3 == 3  # True 5>3 and 3==3
 ```
 
 ## LEGB <a name="LEGB"></a>
