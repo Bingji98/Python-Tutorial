@@ -7,6 +7,7 @@
     2. [Arithmetic Operators](#ao)
     3. [Logical Operators](#lo)
     4. [Bool Method](#bool)
+    5. [is and ==](#is==)
 2. [LEGB](#LEGB)
 3. [Private Methods](#pm)
 
@@ -59,6 +60,31 @@ bool("0")  # True
 bool([1,2,3,4])  # True
 bool((1,2,3,4))  # True
 bool({1:2})  # True
+```
+
+## is and == <a name="is=="></a>
+**is** checks if refer to the same object, whereas **==** compares the value or equality of two objects invoking the \_\_eq\_\_ method.
+```python
+class Person:
+    def __init__(self, age):
+        self.age = age
+
+    def __eq__(self, other):
+        return self.age == other.age
+
+class Animal:
+    def __init__(self, age):
+        self.age = age
+
+    def __eq__(self, other):
+        return self.age == other.age
+
+John = Person(25)
+Peter = Person(25)
+Bird = Animal(25)
+print(John is Peter) # False
+print(John == Peter) # True
+print(John == Bird)  # True
 ```
 
 # LEGB <a name="LEGB"></a>
