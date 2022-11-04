@@ -144,3 +144,29 @@ f()
 >global variable
 >
 >local variable
+
+### Example 7
+```python
+class Parent:
+    def __init__(self, iterable):
+        self.container = []
+        self.__append(iterable)
+
+    def __append(self, iterable):
+        for item in iterable:
+            self.container.append(item)
+
+class Children(Parent):
+    def __append(self, iterable):
+        for item in iterable:
+            print("It is an override method.")
+            continue
+
+p = Parent(("a", "b"))
+print(p.container)
+c = Children(("c", "d"))
+print(c.container) # still implement parent's method
+```
+>['a', 'b']
+>
+>['c', 'd']
