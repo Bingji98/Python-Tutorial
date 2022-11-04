@@ -27,7 +27,6 @@ def outer():
 outer()
 print(x)
 ```
-
 >inner x
 >
 >outer x
@@ -43,7 +42,21 @@ def global_test():
     print(x)
 global_test()
 ```
-
 > global x
 
 Until now everything goes well right? Keep in mind, the company will always find a way to torture you. You will see why I said that after going through the following examples.
+
+### Example 1
+```python
+name = "global variable"
+
+def func1():
+    print(name)
+
+def func2():
+    name = "local variable"
+    func1()
+
+func2()
+```
+>global variable
