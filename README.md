@@ -10,7 +10,7 @@ The LEGB rule is a kind of name lookup procedure, which determines the order in 
 
 Blow is an example of enclosing scope:
 
-*note: when you really want to change enclosing variable, use the **nonlocal** key word*
+*note: when you really want to change the enclosing variable, use the **nonlocal** key word*
 
 ```python
 x = "global x"
