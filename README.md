@@ -111,3 +111,17 @@ outer() # count = 0
 print(count) # count = 0
 ```
 >20 30 30 30 0
+
+### Example 5
+```python
+def outer():
+    count = 10
+    def inner():
+        count = 20
+        nonlocal count
+        print(count)
+    inner()
+    print(count)
+outer()
+```
+>SyntaxError: name 'count' is assigned to before nonlocal declaration
