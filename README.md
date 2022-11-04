@@ -113,6 +113,7 @@ print(count) # count = 0
 >20 30 30 30 0
 
 ### Example 5
+You must declare the variable first when using *nonlocal*.
 ```python
 def outer():
     count = 10
