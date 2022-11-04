@@ -1,1 +1,1 @@
-# Python tutorial for company exams
+# Python tutorial for corporate exam
