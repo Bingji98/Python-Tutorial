@@ -4,6 +4,7 @@
 # Table of Contents
 1. [Operators](#o)
     1. [Comparison Operators](#co)
+    2. [Arithmetic Operators](#ao)
 2. [LEGB](#LEGB)
 3. [Private Methods](#pm)
 
@@ -20,6 +21,23 @@ Operator **\>** is **NOT** limited to comparisons between int/float.
 [1,2,[5,6]]<[1,2,6]  # typeError: '<' not supported between instances of 'list' and 'int'
 5 > 3 == 3  # True 5>3 and 3==3
 ```
+
+## Arithmetic operators <a name="ao"></a>
+Operator **+** can concatenate tupes.
+```python
+(1, 2)+(3, 4)  # (1,2,3,4)
+```
+
+Operator **\*** can multiply tupes, but if there is only one item in the tuple, \ * operation will convert it to int unless you explicitly add a comma.
+```python
+(1, 2)*3  # (1,2,1,2,1,2)
+(1)*3  # int -> 3
+(1,)*3 # (1, 1, 1)
+
+("abc")*3  # "abcabcabc"
+("abc", )*3  # ("abc", "abc", "abc")
+```
+
 
 # LEGB <a name="LEGB"></a>
 The LEGB rule is a kind of name lookup procedure, which determines the order in which Python looks up names. LEGB stand for **Local, Enclosing, Global, and Built-in** scopes. **Enclosing (or nonlocal)** scope is a special scope that only exists for nested functions.
