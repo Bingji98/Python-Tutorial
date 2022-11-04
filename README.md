@@ -105,9 +105,9 @@ def outer():
             print(count) # count = 30
         inner2() # count = 30
         print(count) # count = 30
-    inner()
-    print(count)
-outer()
+    inner() # count = 30
+    print(count) # count = 30
+outer() # count = 0
 print(count) # count = 0
 ```
 >20 30 30 30 0
