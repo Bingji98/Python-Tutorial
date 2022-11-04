@@ -3,6 +3,7 @@
 
 # Table of Contents
 1. [LEGB](#LEGB)
+2. [Private Method](#pm)
 
 
 ## LEGB <a name="LEGB"></a>
@@ -145,7 +146,9 @@ f()
 >
 >local variable
 
-### Example 7
+## Private methods <a name="pm"></a>
+The single underscore (\_) is for indication only and does **NOT** prevent the method from being overrided. Instead, double underscores (\_\_) should be used.
+
 ```python
 class Parent:
     def __init__(self, iterable):
