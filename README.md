@@ -1,1 +1,1 @@
-# This tutorial is for personal use only, and will skip many basic concepts.
+# Python tutorial for company exams
