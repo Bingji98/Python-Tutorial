@@ -150,14 +150,21 @@ f()
 class Parent:
     def __init__(self, iterable):
         self.container = []
+        self._item_print(iterable)
         self.__append(iterable)
+
+    def _item_print(self, iterable):
+        print("Parent private method.")
 
     def __append(self, iterable):
         for item in iterable:
             self.container.append(item)
 
 class Children(Parent):
-    def __append(self, iterable):
+    def _item_print(self, iterable): # _item_print is overrided
+        print("Children private method.")
+
+    def __append(self, iterable): # __append is NOT overrided
         for item in iterable:
             print("It is an override method.")
             continue
@@ -167,6 +174,10 @@ print(p.container)
 c = Children(("c", "d"))
 print(c.container) # still implement parent's method
 ```
+>Parent private method.
+>
 >['a', 'b']
+>
+>Children private method.
 >
 >['c', 'd']
