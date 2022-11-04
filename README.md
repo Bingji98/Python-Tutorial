@@ -98,15 +98,16 @@ def outer():
     def inner():
         nonlocal count
         count = 20
-        print(count)
+        print(count) # count = 20
         def inner2():
             nonlocal count
             count = 30
-            print(count)
-        inner2()
-        print(count)
+            print(count) # count = 30
+        inner2() # count = 30
+        print(count) # count = 30
     inner()
     print(count)
 outer()
+print(count) # count = 0
 ```
 >20 30 30 30 0
