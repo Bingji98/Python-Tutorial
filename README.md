@@ -6,3 +6,4 @@
 
 
 ## LEGB <a name="LEGB"></a>
+The LEGB rule is a kind of name lookup procedure, which determines the order in which Python looks up names. LEGB stand for **Local, Enclosing, Global, and Built-in** scopes.
