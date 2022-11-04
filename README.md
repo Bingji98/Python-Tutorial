@@ -7,7 +7,7 @@
 3. [Private Methods(#pm)
 
 
-## Comparison operators <a name="co"</a>
+## Comparison operators <a name="co"></a>
 
 ## LEGB <a name="LEGB"></a>
 The LEGB rule is a kind of name lookup procedure, which determines the order in which Python looks up names. LEGB stand for **Local, Enclosing, Global, and Built-in** scopes. **Enclosing (or nonlocal)** scope is a special scope that only exists for nested functions.
