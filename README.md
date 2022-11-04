@@ -13,9 +13,9 @@ Operator **\>** is **NOT** limited to comparisons between int/float.
 5.5 > True  # True (between float and boolean)
 1 > True  # False (between int and boolean)
 'ab'>'aa'  # True (between str and str)
-[10,5]<[6,20,30] # True, 6>20
-[3,100,[5,6]]<[3,4,6] # False, 100>4
-[1,2,[5,6]]<[1,2,6] # typeError: '<' not supported between instances of 'list' and 'int'
+[10,5]<[6,20,30]  # True, 6>20
+[3,100,[5,6]]<[3,4,6]  # False, 100>4
+[1,2,[5,6]]<[1,2,6]  # typeError: '<' not supported between instances of 'list' and 'int'
 5 > 3 == 3  # True 5>3 and 3==3
 ```
 
@@ -112,17 +112,17 @@ def outer():
     def inner():
         nonlocal count
         count = 20
-        print(count) # count = 20
+        print(count)  # count = 20
         def inner2():
             nonlocal count
             count = 30
-            print(count) # count = 30
-        inner2() # count = 30
-        print(count) # count = 30
-    inner() # count = 30
-    print(count) # count = 30
-outer() # count = 0
-print(count) # count = 0
+            print(count)  # count = 30
+        inner2()  # count = 30
+        print(count)  # count = 30
+    inner()  # count = 30
+    print(count)  # count = 30
+outer()  # count = 0
+print(count)  # count = 0
 ```
 >20 30 30 30 0
 
@@ -177,10 +177,10 @@ class Parent:
             self.container.append(item)
 
 class Children(Parent):
-    def _item_print(self, iterable): # _item_print is overrided
+    def _item_print(self, iterable):  # _item_print is overrided
         print("Children private method.")
 
-    def __append(self, iterable): # __append is NOT overrided
+    def __append(self, iterable):  # __append is NOT overrided
         for item in iterable:
             print("It is an override method.")
             continue
@@ -188,7 +188,7 @@ class Children(Parent):
 p = Parent(("a", "b"))
 print(p.container)
 c = Children(("c", "d"))
-print(c.container) # still implement parent's method
+print(c.container)  # still implement parent's method
 ```
 >Parent private method.
 >
