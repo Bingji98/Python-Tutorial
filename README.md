@@ -8,6 +8,15 @@
 
 
 ## Comparison operators <a name="co"></a>
+Operator **\>** is NOT limited to comparisons between int/float. 
+```python
+5.5 > True  # True (between float and boolean)
+1 > True  # False (between int and boolean)
+'ab'>'aa'  # True (between str and str)
+[10,5]<[6,20,30] # True, 6>20
+[3,100,[5,6]]<[3,4,6] # False, 100>4
+[1,2,[5,6]]<[1,2,6] # typeError: '<' not supported between instances of 'list' and 'int'
+```
 
 ## LEGB <a name="LEGB"></a>
 The LEGB rule is a kind of name lookup procedure, which determines the order in which Python looks up names. LEGB stand for **Local, Enclosing, Global, and Built-in** scopes. **Enclosing (or nonlocal)** scope is a special scope that only exists for nested functions.
