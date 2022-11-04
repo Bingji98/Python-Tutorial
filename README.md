@@ -8,7 +8,7 @@
 
 
 ## Comparison operators <a name="co"></a>
-Operator **\>** is NOT limited to comparisons between int/float. 
+Operator **\>** is **NOT** limited to comparisons between int/float. 
 ```python
 5.5 > True  # True (between float and boolean)
 1 > True  # False (between int and boolean)
