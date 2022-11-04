@@ -5,6 +5,8 @@
 1. [Operators](#o)
     1. [Comparison Operators](#co)
     2. [Arithmetic Operators](#ao)
+    3. [Logical Operators](#lo)
+    4. [Bool Method](#bool)
 2. [LEGB](#LEGB)
 3. [Private Methods](#pm)
 
@@ -28,7 +30,7 @@ Operator **+** can concatenate tupes.
 (1, 2)+(3, 4)  # (1,2,3,4)
 ```
 
-Operator **\*** can multiply tupes, but if there is only one item in the tuple, \ * operation will convert it to int unless you explicitly add a comma.
+Operator **\*** can multiply tupes, but if there is only one item in the tuple, \ * operation will convert it to the item type unless you explicitly add a comma.
 ```python
 (1, 2)*3  # (1,2,1,2,1,2)
 (1)*3  # int -> 3
@@ -38,6 +40,26 @@ Operator **\*** can multiply tupes, but if there is only one item in the tuple, 
 ("abc", )*3  # ("abc", "abc", "abc")
 ```
 
+## Logical operators <a name="lo"></a>
+Operation **AND** and **OR** can be used between tuples and lists respectively. **AND** takes the last tuple/list as the return, while **OR** returns the first tuple/list. 
+```python
+a = [1, 2, 3] and [4, 5, 6] and [7, 8, 9]
+b = [1, 2, 3] or [4, 5, 6] or [7, 8, 9]
+c = [1, 2, 3] and [4, 5, 6] or [7, 8, 9]
+print(a)  # [7, 8, 9]
+print(b)  # [1, 2, 3]
+print(c)  # [4, 5, 6]
+```
+
+## bool method <a name="bool"></a>
+```python
+bool(0)  # False
+bool(bool(0.0001))  # True
+bool("0")  # True
+bool([1,2,3,4])  # True
+bool((1,2,3,4))  # True
+bool({1:2})  # True
+```
 
 # LEGB <a name="LEGB"></a>
 The LEGB rule is a kind of name lookup procedure, which determines the order in which Python looks up names. LEGB stand for **Local, Enclosing, Global, and Built-in** scopes. **Enclosing (or nonlocal)** scope is a special scope that only exists for nested functions.
