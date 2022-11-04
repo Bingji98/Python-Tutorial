@@ -60,3 +60,57 @@ def func2():
 func2()
 ```
 >global variable
+
+### Example 2
+```python
+name = "global variable"
+
+def func2():
+    name = "local variable"
+    def func1():
+        print(name)
+    func1()
+
+func2()
+```
+>local variable
+
+### Example 3
+```python
+name = "global variable"
+
+def func2():
+    def func1():
+        print(name)
+    func1()
+    name = "local variable"
+ 
+func2()
+```
+>NameError: free variable 'name' referenced before assignment in enclosing scope
+
+### Example 4
+If you want to extend the searching scope, go for *nonlocal*
+```python
+count = 0
+def outer():
+    count = 10
+    def inner():
+        nonlocal count
+        count = 20
+        print(count)
+        def inner2():
+            nonlocal count
+            count = 30
+            print(count)
+        inner2()
+        print(count)
+    inner()
+    print(count)
+outer()
+```
+>20
+>30
+>30
+>30
+>0
