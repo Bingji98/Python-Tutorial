@@ -126,3 +126,21 @@ def outer():
 outer()
 ```
 >SyntaxError: name 'count' is assigned to before nonlocal declaration
+
+### Example 6
+```python
+name = "global variable"
+def f():
+    def inner():
+        nonlocal name
+        name = "local variable"
+
+    name = "global variable"
+    print(name)
+    inner()
+    print(name)
+f()
+```
+>global variable
+>
+>local variable
