@@ -2,10 +2,12 @@
 ![image](https://user-images.githubusercontent.com/61017530/199868413-3ec92fe0-0981-4560-a1c8-db1658d3f14e.png)
 
 # Table of Contents
-1. [Comparison Operators](#co)
+1. [Operators](#o)
+    1. [Comparison Operators](#co)
 2. [LEGB](#LEGB)
 3. [Private Methods](#pm)
 
+# Operators <a name="o"></a>
 
 ## Comparison operators <a name="co"></a>
 Operator **\>** is **NOT** limited to comparisons between int/float. 
@@ -19,7 +21,7 @@ Operator **\>** is **NOT** limited to comparisons between int/float.
 5 > 3 == 3  # True 5>3 and 3==3
 ```
 
-## LEGB <a name="LEGB"></a>
+# LEGB <a name="LEGB"></a>
 The LEGB rule is a kind of name lookup procedure, which determines the order in which Python looks up names. LEGB stand for **Local, Enclosing, Global, and Built-in** scopes. **Enclosing (or nonlocal)** scope is a special scope that only exists for nested functions.
 
 Blow is an example of enclosing scope:
@@ -60,7 +62,7 @@ global_test()
 
 Until now everything goes well right? Keep in mind, the company will always find a way to torture you. You will see why I said that after going through the following examples.
 
-### Example 1
+## Example 1
 ```python
 name = "global variable"
 
@@ -75,7 +77,7 @@ func2()
 ```
 >global variable
 
-### Example 2
+## Example 2
 ```python
 name = "global variable"
 
@@ -89,7 +91,7 @@ func2()
 ```
 >local variable
 
-### Example 3
+## Example 3
 ```python
 name = "global variable"
 
@@ -103,7 +105,7 @@ func2()
 ```
 >NameError: free variable 'name' referenced before assignment in enclosing scope
 
-### Example 4
+## Example 4
 If you want to extend the searching scope, go for *nonlocal*
 ```python
 count = 0
@@ -126,7 +128,7 @@ print(count)  # count = 0
 ```
 >20 30 30 30 0
 
-### Example 5
+## Example 5
 You must declare the variable first when using *nonlocal*.
 ```python
 def outer():
@@ -141,7 +143,7 @@ outer()
 ```
 >SyntaxError: name 'count' is assigned to before nonlocal declaration
 
-### Example 6
+## Example 6
 ```python
 name = "global variable"
 def f():
@@ -159,7 +161,7 @@ f()
 >
 >local variable
 
-## Private methods <a name="pm"></a>
+# Private methods <a name="pm"></a>
 The single underscore (\_) is for indication only and does **NOT** prevent the method from being overrided. Instead, double underscores (\_\_) should be used.
 
 ```python
