@@ -307,3 +307,14 @@ print(l1, l2, l3)
 >2247391114824 2247391114824
 >
 >[[1, 2], [3, 4], [5, 6], 7] [[1, 2], [3, 4], [5, 6]] [[1, 2], [3, 4], [5, 6], 7]
+
+## Example 3
+Using **\*** on list of reference types equals to copy method, and all item generated have the same id.
+```python
+l1 = ["FlyingSPA"]
+l2 = [l1]*3
+for item in l2:
+    print(id(item))
+l2[1][0] = "Ramen"
+print(l2)
+```
