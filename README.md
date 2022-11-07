@@ -10,6 +10,7 @@
     5. [is and ==](#is==)
 2. [LEGB](#LEGB)
 3. [Private Methods](#pm)
+4. [Copy and Deepcopy](#cdc)
 
 # Operators <a name="o"></a>
 
@@ -265,3 +266,24 @@ print(c.container)  # still implement parent's method
 >Children private method.
 >
 >['c', 'd']
+
+
+# Copy and deepcopy <a name="cdc"></a>
+For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
+
+## Example 1
+```python 
+import copy
+
+listA = [0, [0, 0]]
+listB = copy.copy(listA)
+listC = copy.deepcopy(listA)
+listA[0] = 1
+listA[1][0] = 2
+print(listA, listB, listC)
+print(id(listA[1]), id(listB[1]), id(listC))
+```
+
+>[1, [2, 0]] [0, [2, 0]] [0, [0, 0]]
+>
+>2247372890504 2247372890504 2247372861320
