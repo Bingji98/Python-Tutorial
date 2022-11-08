@@ -346,3 +346,30 @@ print(id(list1[0]), id(list2[0]))
 >140707511574928 140707511574928
 
 # Parameter passing <a name="pp"></a>
+If you pass **immutable arguments** like integers, strings or tuples to a function, the passing acts like call-by-value. The object reference is passed to the function parameters. They can't be changed within the function, because they can't be changed at all. If we pass **mutable arguments**, they are also passed by object reference, but they can be changed in place within the function. 
+
+As we can see below, the parameter x inside the function remains a reference to the argument's variable, as long as the parameter is not changed. As soon as a new value is assigned to it, Python creates a separate local variable.
+```python
+a = 1
+
+def int_add(x):
+    print(x, id(x))
+    x+=10
+    print(x, id(x))
+int_add(a)
+print(a, id(a))
+
+list1 = [1, 2, 3]
+
+def list_change(list_input):
+    list_input[0] = 10
+list_change(list1)
+print(list1)
+```
+>1 140707511574928
+>
+>11 140707511575248
+>
+>1 140707511574928
+>
+>[10, 2, 3]
