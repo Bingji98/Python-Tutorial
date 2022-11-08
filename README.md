@@ -11,7 +11,7 @@
 2. [LEGB](#LEGB)
 3. [Private Methods](#pm)
 4. [Copy and Deepcopy](#cdc)
-5. [Parameter Passing](#pp)
+5. [Parameter Passing and Inheritance](#ppi)
 
 # Operators <a name="o"></a>
 
@@ -42,6 +42,30 @@ Operator **\*** can multiply tupes, but if there is only one item in the tuple, 
 ("abc")*3  # "abcabcabc"
 ("abc", )*3  # ("abc", "abc", "abc")
 ```
+
+Operator **+=** on lists does **NOT** create a new object, instead uses extend methods.
+```python
+list1 = [1, 2]
+list2 = list1
+print(id(list1), id(list2))
+list1 = list1 + [3, 4]
+print(id(list1), id(list2))
+print(list1, list2)
+
+list3 = [1, 2]
+list4 = list3
+print(id(list3), id(list4))
+list3 += [3, 4]
+print(id(list3), id(list4))
+print(list3, list4)
+```
+>2247395101320 2247395101320
+>
+>2247391021896 2247395101320 [1, 2, 3, 4] [1, 2]
+>
+>2247395032456 2247395032456
+>
+>2247395032456 2247395032456 [1, 2, 3, 4] [1, 2, 3, 4]
 
 ## Logical operators <a name="lo"></a>
 Operation **AND** and **OR** can be used between tuples and lists respectively. **AND** takes the last tuple/list as the return, while **OR** returns the first tuple/list. 
@@ -345,9 +369,10 @@ print(id(list1[0]), id(list2[0]))
 >
 >140707511574928 140707511574928
 
-# Parameter passing <a name="pp"></a>
+# Parameter passing and inheritance <a name="ppi"></a>
 If you pass **immutable arguments** like integers, strings or tuples to a function, the passing acts like call-by-value. The object reference is passed to the function parameters. They can't be changed within the function, because they can't be changed at all. If we pass **mutable arguments**, they are also passed by object reference, but they can be changed in place within the function. 
 
+## Example 1
 As we can see below, the parameter x inside the function remains a reference to the argument's variable, as long as the parameter is not changed. As soon as a new value is assigned to it, Python creates a separate local variable.
 ```python
 a = 1
@@ -373,3 +398,79 @@ print(list1)
 >1 140707511574928
 >
 >[10, 2, 3]
+
+
+## Example 2
+Subclasses will inheritance their parent class's variable value unless you explicitly revise it.
+```python
+class Parents(object):
+	age = 1
+
+class ChildPeter(Parents):
+    pass
+
+class ChildKate(Parents):
+    pass
+
+ChildPeter.age = 2
+print(Parents.age, ChildPeter.age, ChildKate.age)
+Parents.age = 3
+print(Parents.age, ChildPeter.age, ChildKate.age)
+```
+>1 2 1
+>
+>3 2 3
+
+## Example 3
+Python’s default arguments are **evaluated once when the function is defined**, not each time the function is called. This means that if you use a mutable default argument and mutate it, you will and have mutated that object for all future calls to the function as well.
+```python
+def bad_append(new_item, list_input=[]):
+    list_input.append(new_item)
+    print(id(list_input), list_input)
+    return
+
+def good_append(new_item, list_input=None):
+    print(id(list_input)) # the same id each time the function is called
+    if list_input is None:
+        list_input = []
+
+    list_input.append(new_item)
+    print(id(list_input), list_input)
+    return
+
+bad_append("1")
+bad_append("2")
+good_append("1")
+good_append("2")
+```
+>1835597774152 ['1'] 1835597774152 ['1', '2']
+>
+>140707511098592 1835514390280 ['1']
+>
+>140707511098592 1835594568776 ['2']
+
+## Example 4
+If you pass a variable, the function will use the variable reference instead of the default argument. 
+```python
+def list_append(new_item, list_input=[]):
+    print(id(list_input))
+    list_input.append(new_item)
+    print(id(list_input), list_input)
+    return list_input
+
+list1 = list_append(1)
+list2 = list_append(1, [])
+list3 = list_append(2)
+list4 = list_append(2, [])
+print(list1, list2, list3, list4)
+```
+>1835585422600 1835585422600 [1]
+>
+>1835585421704 1835585421704 [1]
+>
+>1835585422600 1835585422600 [1, 2]
+>
+>1835596669064 1835596669064 [2]
+>
+>[1, 2] [1] [1, 2] [2]
+
