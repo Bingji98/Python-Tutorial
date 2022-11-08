@@ -592,7 +592,7 @@ finally:
 ```
 >try process except process finally process
 >
->**RuntimeError: No active exception to reraise**
+>`RuntimeError: No active exception to reraise`
 
 All codes after "raise" statement will **NOT** be executed.
 ```python
@@ -625,3 +625,22 @@ def foo():
         pass
     return
 ```
+
+Except suite can only catch exceptions from try suite, and all exceptions from other suits should be handled separately. 
+```python
+class MyException(Exception):
+    code = 404
+
+try:
+    print("try process")
+    raise MyException
+except MyException as err:
+    print("except process")
+    raise MyException
+finally:
+    print("finally process")
+    raise MyException
+```
+>try process except process finally process
+>
+>`MyException MyException MyException`
