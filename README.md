@@ -11,6 +11,7 @@
 2. [LEGB](#LEGB)
 3. [Private Methods](#pm)
 4. [Copy and Deepcopy](#cdc)
+5. [Parameter Passing](#pp)
 
 # Operators <a name="o"></a>
 
@@ -326,3 +327,22 @@ print(l2)
 >2247391211016
 >
 >[['Ramen'], ['Ramen'], ['Ramen']]
+
+## Example 4
+Python keeps small integers and strings permanently so it doesn't have to create an object every time.
+```python
+import copy
+
+string1 = "Flying"
+string2 = "Flying"
+print(id(string1), id(string2))
+
+list1 = [1, 2]
+list2 = copy.deepcopy(list1)
+print(id(list1[0]), id(list2[0]))
+```
+>2247307226032 2247307226032
+>
+>140707511574928 140707511574928
+
+# Parameter passing <a name="pp"></a>
