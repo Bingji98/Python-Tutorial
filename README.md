@@ -16,6 +16,8 @@
     1. [Set](#set)
 
 7. [String](#str)
+8. [Decimal Numbers](#dn)
+9. [Exceptions](#ex)
 
 # Operators <a name="o"></a>
 
@@ -560,3 +562,66 @@ print(str1.rfind("the"))
 print(str1.index("the"))
 ```
 >10 43 10
+
+# Decimal numbers <a name="dn"></a>
+The floating-point calculations are inaccurate in Python because the rationals are approximating that cannot be represented finitely in base 2 and in general they are approximating numbers which may not be representable in finitely many digits in any base. **In a word, inaccuracies occur due to conversion between fractions and decimals**. One way to solve is problem is to use decimal package. 
+
+```python
+from decimal import Decimal
+print(0.1+0.2 == 0.3)
+print(0.1+0.2)
+print(Decimal("0.1")+Decimal("0.2") == Decimal("0.3"))
+```
+>False 0.30000000000000004 True
+
+# Exceptions <a name="ex"></a>
+In the try-except-else-finally block, you need to explicitly declare the Exception type apart from "except" suite. Even though a RuntimeError is raised, all corresponding blocks are still executed.
+```python
+try:
+    print("try process")
+    raise
+except Exception as err:
+    print("except process")
+    raise
+else:
+    print("else process")
+    raise
+finally:
+    print("finally process")
+    raise
+```
+>try process except process finally process
+>
+>**RuntimeError: No active exception to reraise**
+
+All codes after "raise" statement will **NOT** be executed.
+```python
+class MyException(Exception):
+    code = 404
+
+try:
+    print("before raise")
+    raise MyException
+    print("after exception")
+except:
+    print("except process")
+```
+>before raise except process
+
+It is forbidden to use return, break and continue within a finally suite since it leads to behaviour which is not at all obvious. The return within the finally will **silently cancel any exception that propagates through the finally suite**, and break and continue **have similar behaviour (they silence exceptions) if they jump to code outside the finally suite**. The following two functions are equivalent:
+```python
+def foo():
+    try:
+        foo()
+    finally:
+        return
+```
+
+```python
+def foo():
+    try:
+        foo()
+    except:
+        pass
+    return
+```
