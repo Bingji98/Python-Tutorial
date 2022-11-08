@@ -12,6 +12,10 @@
 3. [Private Methods](#pm)
 4. [Copy and Deepcopy](#cdc)
 5. [Parameter Passing and Inheritance](#ppi)
+6. [Basic Data Structures](#bds)
+    1. [Set](#set)
+
+7. [String](#str)
 
 # Operators <a name="o"></a>
 
@@ -474,3 +478,85 @@ print(list1, list2, list3, list4)
 >
 >[1, 2] [1] [1, 2] [2]
 
+# Basic data structures <a name="bds"></a>
+
+## Set <a name="set"></a>
+1. The remove() method will raise an error if the specified item does not exist, and the discard() method will **not**.
+2. We may also use the pop() method to remove and return an item. However, there is no way to know which item will be popped because the set is an unordered data type. It's absolutely random!
+```python
+set1 = {1, 2, 3}
+set1.add(4)  # add element
+print(set1)  # {1, 2, 3, 4}
+
+set2 = {1, 2, 3}
+set2.update([3, 4, 5])  # add more than one element
+print(set2)  # {1, 2, 3, 4, 5}
+
+set3 = {1, 2, 3}
+set3.discard(3)  # remove element
+print(set3)  # {1, 2}
+
+set4 = {1, 2, 3}
+set4.remove(3)  # remove element
+print(set4)  # {1, 2}
+
+set5 = {1, 2, 3}
+set5.pop()  # pop one element
+
+set6 = {1, 2, 3}
+set6.clear()  # delete all elements
+print(set6)  # set()
+```
+
+Set operations are performed in one of two ways: by an operator or by a method. In this situation, a set, it's worth noting that each operator corresponds to a distinct Python special function. So, they both accomplish the same thing but have distinct syntax requirements. Keep in mind, the set methods do **NOT** change any set in place, but return a new set.
+
+```python
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+combined_set1 = set1 | set2
+combined_set2 = set1.union(set2)
+print(set1 ,set2)  # {1, 2, 3} {3, 4, 5}
+print(combined_set1, combined_set2)  # {1, 2, 3, 4, 5} {1, 2, 3, 4, 5}
+
+set3 = {1, 2, 3}
+set4 = {3, 4, 5}
+intersected_set1 = set3 & set4
+intersected_set2 = set3.intersection(set4)
+print(set3 ,set4)  # {1, 2, 3} {3, 4, 5}
+print(intersected_set1, intersected_set2)  # {3} {3}
+
+set5 = {1, 2, 3}
+set6 = {3, 4, 5}
+diff_set1 = set5 - set6
+diff_set2 = set5.difference(set6)
+print(set5 ,set6)  # {1, 2, 3} {3, 4, 5}
+print(diff_set1, diff_set2)  # {1, 2} {1, 2}
+
+set7 = {1, 2, 3}
+set8 = {3, 4, 5}
+sym_diff_set1 = set7 ^ set8
+sym_diff_set2 = set7.symmetric_difference(set8)
+print(set7 ,set8)  # {1, 2, 3} {3, 4, 5}
+print(sym_diff_set1, sym_diff_set2)  # {1, 2, 4, 5} {1, 2, 4, 5}
+```
+
+# String <a name="str"></a>
+It is often the case that you need to split a string into a list. The split() method splits a string into a list of strings after breaking the given string by the specified separator. You may specify the delimiter and the maximum number of splits.
+```python
+str1 = "FlingSPA is the best contributor."
+print(str1.split(" "))
+print(str1.split(" ", maxsplit = 3))
+```
+>['FlingSPA', 'is', 'the', 'best', 'contributor.']
+>
+>['FlingSPA', 'is', 'the', 'best contributor.']
+
+The find(), rfind() and index() method all return the index of a certain pattern(substring). rfind() returns the highest index (from the right) for the provided substring, whereas find() and index() return the index position of the element's first occurrence. The difference is that find() and rfind() return -1 when the substring is not found, while index() raises ValueError.
+
+```python
+str1 = "Python is the best programming language in the world."
+print(str1.find("the"))
+print(str1.rfind("the"))
+print(str1.index("the"))
+```
+>10 43 10
