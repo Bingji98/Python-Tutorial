@@ -20,6 +20,7 @@
 9. [Exceptions](#ex)
 10. [Generators and Iterators](#gi)
 11. [Regular Expression](#re)
+12. [Lambda Function](#lf)
 
 # Operators <a name="o"></a>
 
@@ -771,3 +772,66 @@ print(statement_revised)
 >FlyingSPA is a nice person.
 >
 >FlyingSP# is # nice person.
+
+# Lambda function <a name="lf"></a>
+A lambda function is a small anonymous function. A lambda function can take any number of arguments, but can only have one expression. For intermediate learners, writing a lambda function is not a big deal, but they might come across some unexpected results when facing function closure. 
+```python
+fun = [lambda x: print(i, x, i * x) for i in range(3)]
+
+for item in fun:
+    item(2)
+```
+> 2 2 4
+> 
+> 2 2 4
+> 
+> 2 2 4
+
+The result is not we want right? It is not easy to debug from the lambda expression, and let's rewrite it.
+```python
+def func():
+    func_list = []
+    for i in range(3):
+        def multi(x):
+	    print(i, x, i * x)
+            return
+        func_list.append(multi)
+    return func_list
+
+for item in func():
+    item(2)
+```
+> 2 2 4
+> 
+> 2 2 4
+> 
+> 2 2 4
+
+The problem is that the multi() function is not executed **until we explicitly call it**. So the multi() function does **NOT** know the value of i when we put it into the list. When we call it(item()), the multi() function gets the value of i which is 2 at that time. As long as we find the reason, it is easy to get it on the right track. 
+
+```python
+fun = [lambda x, i = i: print(i, x, i * x) for i in range(3)]
+
+for item in fun:
+    item(2)
+```
+>0 2 0
+>
+>1 2 2
+>
+>2 2 4
+
+**Don't know why I put i = i?**
+```python
+def func():
+    func_list = []
+    for i in range(3):
+        def multi(x, i =i):
+	    print(i, x, i * x)
+            return
+        func_list.append(multi)
+    return func_list
+
+for item in func():
+    item(2)
+```
