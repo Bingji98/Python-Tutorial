@@ -19,6 +19,7 @@
 8. [Decimal Numbers](#dn)
 9. [Exceptions](#ex)
 10. [Generators and Iterators](#gi)
+11. [Regular Expression](#re)
 
 # Operators <a name="o"></a>
 
@@ -683,7 +684,7 @@ print(next(infIterator))
 ```
 >1 3 5
 
-Generator is another way of creating iterators in a simple way where it uses the keyword “yield” instead of returning it in a defined function. Generators are implemented using a function. When it reaches the final item, a StopIteration exception will be raised.
+Generator is another way of creating iterators in a simple way where it uses the keyword "yield" instead of returning it in a defined function. Generators are implemented using a function. When it reaches the final item, a StopIteration exception will be raised.
 ```python
 def squared_num(n):
     for i in range(1, n+1):
@@ -698,3 +699,75 @@ print(next(squared_seq))
 >1 4 9
 >
 >`StopIteration`
+
+Generators can also be created without using the keyword "yield".
+```python
+add_gen = (x+y for x in range(2) for y in range(2))
+print(next(add_gen))
+print(next(add_gen))
+print(next(add_gen))
+print(next(add_gen))
+```
+>0 1 1 2
+
+# Regular expression <a name="re"></a>
+Re module in Python provides regular expression matching operations. There are three commonly used methods: **match(), search() and findall()**. The re.match() method finds match if it occurs at **start of the string**. The re.search() method is similar to re.match() but it **does NOT limit** us to find matches at the beginning of the string only. The re.findall() helps to get a list of **all matching patterns**, which means it searches from start or end of the given string.
+```python
+import re
+
+score = "FlyingSPA_100, Jack_50, Kate_80"
+score_match = re.match(r"([a-zA-Z]*)_(\d*)", score)
+score_search = re.search(r"([a-zA-Z]*)_(\d*)", score)
+score_findall = re.findall(r"([a-zA-Z]*)_(\d*)", score)
+print(score_match.groups())
+print(score_search.groups())
+print(score_findall)
+```
+>('FlyingSPA', '100')
+>
+>('FlyingSPA', '100')
+>
+>[('FlyingSPA', '100'), ('Jack', '50'), ('Kate', '80')]
+
+The match() and search() method both have a group and groups function, as follows:
+```python
+import re
+
+score = "FlyingSPA_100, Jack_50, Kate_80"
+score_match = re.match(r"([a-zA-Z]*)_(\d*)", score)
+
+print(score_match.group())  # return a string
+print(score_match.group(0))  # return all occurrence
+print(score_match.group(1))  # return the first element
+print(score_match.group(2))  # return the second element
+print(score_match.groups())  # return a tuple based on your expression
+```
+
+The inditer() works exactly the same as the findall() method except it returns an iterator yielding match objects matching the regex pattern in a string instead of a list.
+```python
+import re
+
+score = "FlyingSPA_100, Jack_50, Kate_80"
+score_finditer = re.finditer(r"([a-zA-Z]*)_(\d*)", score)
+print(next(score_finditer))
+print(next(score_finditer))
+print(next(score_finditer))
+```
+><re.Match object; span=(0, 13), match='FlyingSPA_100'>
+>
+><re.Match object; span=(15, 22), match='Jack_50'>
+>
+><re.Match object; span=(24, 31), match='Kate_80'>
+
+If you want to find some patterns and replace them, the sub() can help you do this. It returns a string where all matching occurrences of the specified pattern are replaced by the replace string. 
+```python
+import re
+
+statement = "FlyingSPA is a nice person."
+statement_revised = re.sub("[aA]", "#", statement)
+print(statement)
+print(statement_revised)
+```
+>FlyingSPA is a nice person.
+>
+>FlyingSP# is # nice person.
