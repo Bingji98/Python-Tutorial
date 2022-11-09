@@ -18,6 +18,7 @@
 7. [String](#str)
 8. [Decimal Numbers](#dn)
 9. [Exceptions](#ex)
+10. [Generators and Iterators](#gi)
 
 # Operators <a name="o"></a>
 
@@ -644,3 +645,56 @@ finally:
 >try process except process finally process
 >
 >`MyException MyException MyException`
+
+# Generators and iterators <a name="gi"></a>
+An iterator is an object which contains a countable number of values and it is used to iterate over iterable objects like list, tuples, sets, etc.
+Using an iterator:
+1. iter() keyword is used to create an iterator containing an iterable object.
+2. next() keyword is used to call the next element in the iterable object.
+3. After the iterable object is completed, to use them again reassign them to the same object.
+
+```python
+list1 = [1, 2, 3]
+list1_iterator = iter(list1)
+print(next(list1_iterator))
+print(next(list1_iterator))
+print(next(list1_iterator))
+```
+>1 2 3
+
+To create an object/class as an iterator you have to implement the methods **__iter__()** and **__next__()** to your object. It is possible to create an infinite or finite iterator.
+```python
+class InfiniteNumbers:
+  def __iter__(self):
+    self.a = 1
+    return self
+
+  def __next__(self):
+    x = self.a
+    self.a += 2
+    return x
+
+
+infIterator = iter(InfiniteNumbers())
+
+print(next(infIterator))
+print(next(infIterator))
+print(next(infIterator))
+```
+>1 3 5
+
+Generator is another way of creating iterators in a simple way where it uses the keyword “yield” instead of returning it in a defined function. Generators are implemented using a function. When it reaches the final item, a StopIteration exception will be raised.
+```python
+def squared_num(n):
+    for i in range(1, n+1):
+        yield i**2
+
+squared_seq = squared_num(3)
+print(next(squared_seq))
+print(next(squared_seq))
+print(next(squared_seq))
+print(next(squared_seq))
+```
+>1 4 9
+>
+>`StopIteration`
