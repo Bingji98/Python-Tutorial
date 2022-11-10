@@ -19,8 +19,9 @@
 8. [Decimal Numbers](#dn)
 9. [Exceptions](#ex)
 10. [Generators and Iterators](#gi)
-11. [Regular Expression](#re)
-12. [Lambda Function](#lf)
+11. [Decorators](#dec)
+12. [Regular Expression](#re)
+13. [Lambda Function](#lf)
 
 # Operators <a name="o"></a>
 
@@ -710,6 +711,77 @@ print(next(add_gen))
 print(next(add_gen))
 ```
 >0 1 1 2
+
+# Decorators <a name="dec"></a>
+A decorator is a design pattern in Python that allows a user to add new functionality to an existing object without modifying its structure. It is recommended to use **functools.wraps** to create decorators since the general method can change internal properties.
+```python
+def general_decorator(func):
+    def wrapper(*args, **kwargs):
+        print("call decorated function")
+        return func(*args, **kwargs)
+    return wrapper
+
+@general_decorator
+def new_func():
+    """docstring of new_func"""
+    print("this is the new_func")
+    return
+
+new_func()
+print(new_func.__name__)
+print(new_func.__doc__)
+```
+>call decorated function this is the new_func
+>
+>wrapper
+>
+>None
+
+If we use functools.wraps, the corresponding properties will still be the same as the original function and the function of the decorator remains the same. 
+```python
+from functools import wraps
+
+def general_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print("call decorated function")
+        return func(*args, **kwargs)
+    return wrapper
+
+@general_decorator
+def new_func():
+    """docstring of new_func"""
+    print("this is the new_func")
+    return
+
+new_func()
+print(new_func.__name__)
+print(new_func.__doc__)
+```
+>call decorated function this is the new_func
+>
+>new_func
+>
+>docstring of new_func
+
+Python’s property() is the Pythonic way to avoid formal getter and setter methods in your code. This function allows you to turn class attributes into properties or managed attributes. Be aware that in the following example, you simply add an attribute, namely __age, and the class attribute remains unchanged.
+```python
+class Person(object):
+    def __init__(self):
+        self.__age = 30
+    @property
+    def age(self):
+        return self.__age
+
+p = Person()
+p.__age = 25
+print(p.__dict__)
+print(p.age, p.__age)
+```
+>{'_Person__age': 30, '__age': 25}
+>
+>30 25
+
 
 # Regular expression <a name="re"></a>
 Re module in Python provides regular expression matching operations. There are three commonly used methods: **match(), search() and findall()**. The re.match() method finds match if it occurs at **start of the string**. The re.search() method is similar to re.match() but it **does NOT limit** us to find matches at the beginning of the string only. The re.findall() helps to get a list of **all matching patterns**, which means it searches from start or end of the given string.
