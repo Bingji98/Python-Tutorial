@@ -548,6 +548,13 @@ print(sym_diff_set1, sym_diff_set2)  # {1, 2, 4, 5} {1, 2, 4, 5}
 ```
 
 # String <a name="str"></a>
+There are four ways for string concatenation:
+- + operator ("stringA" + "stringB")
+- % operator ("My name is, %s!" % name)
+- format ("My name is {}".format(name))
+- f string (f"My name is {name}))
++ operator is used for simple string concatenation, and % operator is not recommended. Using f-strings is suggested for Python 3.6 and above while .format() is best suited for Python 2.6 and above.
+
 It is often the case that you need to split a string into a list. The split() method splits a string into a list of strings after breaking the given string by the specified separator. You may specify the delimiter and the maximum number of splits.
 ```python
 str1 = "FlingSPA is the best contributor."
