@@ -579,6 +579,26 @@ print(Decimal("0.1")+Decimal("0.2") == Decimal("0.3"))
 ```
 >False 0.30000000000000004 True
 
+If you want to compare float numbers, try to use tolerance scope instead of ==.
+```python
+x = 1.0 - 0.8
+y = 0.8 - 0.6
+EPSILON = 1e-15
+if abs(x - y) < EPSILON:
+    print("x is equal to y")
+```
+>x is equal to y
+
+If you have Python 3.5 or higher version, use math.isclose.
+```python
+import math
+
+x = 1.0
+y = 0.9999997
+print(math.isclose(x, y, rel_tol=1e-5))
+```
+>True
+
 # Exceptions <a name="ex"></a>
 In the try-except-else-finally block, you need to explicitly declare the Exception type apart from "except" suite. Even though a RuntimeError is raised, all corresponding blocks are still executed.
 ```python
