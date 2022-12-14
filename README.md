@@ -9,12 +9,13 @@
     4. [Bool Method](#bool)
     5. [is and ==](#is==)
 2. [LEGB](#LEGB)
-3. [Private Methods](#pm)
+3. [Class](#clss) 
+   1. [Private Methods](#pm)
+   2. [Abstract Class](#ac)
 4. [Copy and Deepcopy](#cdc)
 5. [Parameter Passing and Inheritance](#ppi)
 6. [Basic Data Structures](#bds)
     1. [Set](#set)
-
 7. [String](#str)
 8. [Decimal Numbers](#dn)
 9. [Exceptions](#ex)
@@ -23,8 +24,8 @@
 12. [Regular Expression](#re)
 13. [Functions](#funcs)
      1. [Parameters](#paras)
-15. [Lambda Function](#lf)
-16. [Future Module](#fm)
+14. [Lambda Function](#lf)
+15. [Future Module](#fm)
 
 
 # Operators <a name="o"></a>
@@ -267,7 +268,8 @@ f()
 >
 >local variable
 
-# Private methods <a name="pm"></a>
+# Class <a name="clss"></a>
+## Private methods <a name="pm"></a>
 The single underscore (\_) is for indication only and does **NOT** prevent the method from being overrided. Instead, double underscores (\_\_) should be used.
 
 ```python
@@ -306,6 +308,7 @@ print(c.container)  # still implement parent's method
 >
 >['c', 'd']
 
+## Abstract Class <a name="ac"></a>
 
 # Copy and deepcopy <a name="cdc"></a>
 For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
