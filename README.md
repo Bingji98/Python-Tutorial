@@ -309,6 +309,24 @@ print(c.container)  # still implement parent's method
 >['c', 'd']
 
 ## Abstract Class <a name="ac"></a>
+An abstract class in Python is typically created to declare a set of methods that must be created in any child class built on top of this abstract class. Python has a module called abc (abstract base class) that offers the necessary tools for crafting an abstract base class. 
+
+```python
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+    @abstractmethod
+    def roar(self):
+        pass
+
+class Dog(Animal):
+    def roar(self):
+        print("dog bark")
+
+dog = Dog()
+dog.roar()
+```
+>dog bark
 
 # Copy and deepcopy <a name="cdc"></a>
 For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
