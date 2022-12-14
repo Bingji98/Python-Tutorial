@@ -22,6 +22,7 @@
 11. [Decorators](#dec)
 12. [Regular Expression](#re)
 13. [Lambda Function](#lf)
+14. [Future Module](#fm)
 
 # Operators <a name="o"></a>
 
@@ -907,3 +908,19 @@ def func():
 for item in func():
     item(2)
 ```
+
+# __future__ module <a name="fm"></a>
+__future__ module is a built-in module in Python that is used to inherit new features that will be available in the new Python versions. The basic idea of the __future__ module is to help migrate to use Python 3.X features. **The future statements must at the top of the file, otherwise the Python interpreter will raise SyntaxError**
+
+```python
+"""This is a module
+Functions of this module
+"""
+
+from __future__ import print_function
+
+__all__ = ['hello', 'world']
+__version__ = 'V1.0'
+```
+
+
