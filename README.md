@@ -21,8 +21,11 @@
 10. [Generators and Iterators](#gi)
 11. [Decorators](#dec)
 12. [Regular Expression](#re)
-13. [Lambda Function](#lf)
-14. [Future Module](#fm)
+13. [Functions](#funcs)
+     1. [Parameters](#paras)
+15. [Lambda Function](#lf)
+16. [Future Module](#fm)
+
 
 # Operators <a name="o"></a>
 
@@ -872,6 +875,22 @@ print(statement_revised)
 >FlyingSPA is a nice person.
 >
 >FlyingSP# is # nice person.
+
+# Functions <a name="funcs"></a>
+## Parameters <a name="paras"></a>
+Python's default arguments are evaluated once when the function is defined, not each time the function is called. This means that if you use a mutable default argument and mutate it,** you will and have mutated that object for all future calls to the function as well**. As a result, only use integer boolean, float, string and None as default arguments.
+
+```python
+def fun(arg_a, list_arg=[]):
+    list_arg.append(arg_a)
+    print(list_arg)
+fun(1)
+fun(1)
+fun(1, [])
+```
+>[1]
+>[1, 1]
+>[1]
 
 # Lambda function <a name="lf"></a>
 A lambda function is a small anonymous function. A lambda function can take any number of arguments, but can only have one expression. For intermediate learners, writing a lambda function is not a big deal, but they might come across some unexpected results when facing function closure. 
