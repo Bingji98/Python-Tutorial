@@ -371,6 +371,13 @@ print(slots_demo.__dict__)
 >{'\_\_module\_\_': '\_\_main\_\_', '\_\_slots\_\_': ['a', 'b'], '\_\_init\_\_': <function SlotsDemo.\_\_init\_\_ at 0x000001F698A4CAF8>, 'a': <member 'a' of 'SlotsDemo' objects>, 'b': <member 'b' of 'SlotsDemo' objects>, '\_\_doc\_\_': None}
 >AttributeError: 'SlotsDemo' object has no attribute '\_\_dict\_\_'
 
+Below, I list the pros and cons of using \_\_slots\_\_.
+
+* pros: \_\_slots\_\_ can be definitely useful when you have a pressure on memory usage. It’s extremely easy to add or remove with just one-line of code. The possibility of having \_\_dict\_\_ as an attribute in \_\_slots\_\_ gives developers more flexibility to manage attributes while taking care of the performance.
+
+* cons: You need to be clear about what you are doing and what you want to achieve with \_\_slots\_\_, especially when inheriting a class with it. The order of inheritance, the attribute names can make a huge difference in the performance.
+
+You can’t inherit a built-in type such as int, bytes, tuple with non-empty \_\_slots\_\_. Besides, you can’t assign a default value to attributes in \_\_slots\_\_. This is because these attributes are supposed to be descriptors. Instead, you can assign the default value in \_\_init\_\_().
 
 # Copy and deepcopy <a name="cdc"></a>
 For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
