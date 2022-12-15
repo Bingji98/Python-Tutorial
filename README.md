@@ -8,7 +8,7 @@
     3. [Logical Operators](#lo)
     4. [Bool Method](#bool)
     5. [is and ==](#is==)
-2. [LEGB](#LEGB)
+2. [LEGB](#legb)
 3. [Class](#clss) 
    1. [Private Methods](#pm)
    2. [Abstract Class](#ac)
@@ -128,7 +128,7 @@ print(John == Peter) # True
 print(John == Bird)  # True
 ```
 
-# LEGB <a name="LEGB"></a>
+# LEGB <a name="legb"></a>
 The LEGB rule is a kind of name lookup procedure, which determines the order in which Python looks up names. LEGB stand for **Local, Enclosing, Global, and Built-in** scopes. **Enclosing (or nonlocal)** scope is a special scope that only exists for nested functions.
 
 Blow is an example of enclosing scope:
