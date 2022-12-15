@@ -726,6 +726,19 @@ finally:
 >
 >`MyException MyException MyException`
 
+A parent’s exception class can catch the child’s exception class, but what is actually obtained is the child exception.
+```python
+class ChildException(Exception):
+    def __init__(self):
+        super().__init__(self, "Child Exception")
+
+try:
+    raise ChildException
+except Exception as exc:
+    print("catch exception: %s" % exc)
+```
+>catch exception: (ChildException(...), 'Child Exception')
+
 # Generators and iterators <a name="gi"></a>
 An iterator is an object which contains a countable number of values and it is used to iterate over iterable objects like list, tuples, sets, etc.
 Using an iterator:
