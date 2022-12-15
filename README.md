@@ -12,6 +12,7 @@
 3. [Class](#clss) 
    1. [Private Methods](#pm)
    2. [Abstract Class](#ac)
+   3. [\_\_slots\_\_](#slots)
 4. [Copy and Deepcopy](#cdc)
 5. [Parameter Passing and Inheritance](#ppi)
 6. [Basic Data Structures](#bds)
@@ -337,6 +338,39 @@ dog = Dog()
 dog.roar()
 ```
 >dog bark
+
+## \_\_slots\_\_ <a name="slots"></a>
+When we create an object from a class, the attributes of the object will be stored in a dictionary called __dict__. We use this dictionary to get and set attributes. It allows us to dynamically create new attributes after the creation of the object. 
+```python
+class A:
+    def __init__(self):
+        self.__j=1
+        self.number=5
+a = A()
+print(a.__dict__)
+```
+>{'\_A\_\_j': 1, 'number': 5}
+
+However, when it comes to creating thousands or millions of objects, we might face some issues:
+
+1. Dictionary needs memory. Millions of objects will definitely eat up the RAM usage.
+2. Dictionary is in fact a hash map. The worst case of the time complexity of get/set in a hash mapis O(n).
+
+\_\_slots\_\_ allows us to explicitly declare data members (like properties) and deny the creation of \_\_dict\_\_ and \_\_weakref\_\_ (unless explicitly declared in \_\_slots\_\_ or available in a parent).
+
+```python
+class SlotsDemo:
+    __slots__ = ["a", "b"]
+    def __init__(self):
+        self.a = 1
+        self.b = 1
+slots_demo = SlotsDemo()
+print(SlotsDemo.__dict__)
+print(slots_demo.__dict__)
+```
+>{'\_\_module\_\_': '\_\_main\_\_', '\_\_slots\_\_': ['a', 'b'], '\_\_init\_\_': <function SlotsDemo.\_\_init\_\_ at 0x000001F698A4CAF8>, 'a': <member 'a' of 'SlotsDemo' objects>, 'b': <member 'b' of 'SlotsDemo' objects>, '\_\_doc\_\_': None}
+>AttributeError: 'SlotsDemo' object has no attribute '\_\_dict\_\_'
+
 
 # Copy and deepcopy <a name="cdc"></a>
 For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
