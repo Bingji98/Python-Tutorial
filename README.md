@@ -167,6 +167,16 @@ global_test()
 ```
 > global x
 
+Don not use i+= or i-= to change the enclosing or global variables, because it will raise UnboundLocalError.
+```python
+i =1
+def func():
+    i += 2
+func()
+```
+>UnboundLocalError: local variable 'i' referenced before assignment
+
+
 Until now everything goes well right? Keep in mind, the company will always find a way to torture you. You will see why I said that after going through the following examples.
 
 ## Example 1
