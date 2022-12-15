@@ -594,11 +594,12 @@ sym_diff_set2 = set7.symmetric_difference(set8)
 print(set7 ,set8)  # {1, 2, 3} {3, 4, 5}
 print(sym_diff_set1, sym_diff_set2)  # {1, 2, 4, 5} {1, 2, 4, 5}
 ```
+**Notice: there is no "-" operation for set.**
 
 # String <a name="str"></a>
 There are four ways for string concatenation:
-- + operator ("stringA" + "stringB")
-- % operator ("My name is, %s!" % name)
+- "+" operator ("stringA" + "stringB")
+- "%" operator ("My name is, %s!" % name)
 - format ("My name is {}".format(name))
 - f string (f"My name is {name}))
 + operator is used for simple string concatenation, and % operator is not recommended. Using f-strings is suggested for Python 3.6 and above while .format() is best suited for Python 2.6 and above.
@@ -1013,5 +1014,4 @@ from __future__ import print_function
 __all__ = ['hello', 'world']
 __version__ = 'V1.0'
 ```
-
 
