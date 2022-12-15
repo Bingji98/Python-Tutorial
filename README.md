@@ -414,6 +414,20 @@ print(id(list1[0]), id(list2[0]))
 >
 >140707511574928 140707511574928
 
+Slicing and list() are shallow copy.
+```python
+a = [[1, 2, 3, 4],[4, 5, 6, 7]]
+b = a[0:1]
+a[0][1] = 9
+print(a, b)
+
+c = list(a)
+a[1][2] = 99
+print(a, c)
+```
+>[[1, 9, 3, 4], [4, 5, 6, 7]] [[1, 9, 3, 4]]
+>[[1, 9, 3, 4], [4, 5, 99, 7]] [[1, 9, 3, 4], [4, 5, 99, 7]]
+
 # Parameter passing and inheritance <a name="ppi"></a>
 If you pass **immutable arguments** like integers, strings or tuples to a function, the passing acts like call-by-value. The object reference is passed to the function parameters. They can't be changed within the function, because they can't be changed at all. If we pass **mutable arguments**, they are also passed by object reference, but they can be changed in place within the function. 
 
