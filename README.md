@@ -418,6 +418,12 @@ obj.m()
 >In Class3
 >In Class1
 
+The order of "Class3" and "Class1" is quiet unexpected, right? If you follow the instructions above, you will end up with "4 - 2 - 1 - 3". This is because in Python 3 or in Python 2, using object as a parent class, the new MRO algorithm is used.  The definition of the new classes algorithm is that it is the same than the old one, except with this difference : each time a class is found in built search path, Python asked the question « Is it a good head ? » and if not, it removes the class from the final search path.
+
+A class is said as being a « good head » **if there is no other class in the tail of the search path which inherits from it**. In this case it is more natural to use the method defined by its derived class.
+
+In the example above, the atucal searching path is "4 - 2 - 1 - 3 - 1". Since Class4 inherits from Class, Class1 is not searched the first time but after Class3 instead.
+
 # Copy and deepcopy <a name="cdc"></a>
 For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
 
