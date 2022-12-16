@@ -381,9 +381,9 @@ Below, I list the pros and cons of using \_\_slots\_\_.
 You can’t inherit a built-in type such as int, bytes, tuple with non-empty \_\_slots\_\_. Besides, you can’t assign a default value to attributes in \_\_slots\_\_. This is because these attributes are supposed to be descriptors. Instead, you can assign the default value in \_\_init\_\_().
 
 ## Multiple inheritance <a name="mi"></a>
-When a class is derived from more than one base class it is called multiple Inheritance. The derived class inherits all the features of the base case. When some parents have the same function, we need an algorithm to iterate over them, which is name method resolution order (MRO) algorithm. 
+When a class is derived from more than one base class it is called multiple Inheritance. The derived class inherits all the features of the base case. When some parents have the same function, we need an algorithm to iterate over them, which is name **method resolution order (MRO) algorithm**. 
 
-When a class inherits from multiple parents, Python build a list of classes to search for when it needs to resolve which method has to be called when one in invoked by an instance. This algorithm is a tree routing, and works this way, deep first, from left to right :
+When a class inherits from multiple parents, Python build a list of classes to search for when it needs to resolve which method has to be called when one in invoked by an instance. This algorithm is a tree routing, and works this way, deep first, from left to right:
 1. Look if method exists in instance class
 2. If not, looks if it exists in its first parent, then in the parent of the parent and so on
 3. If not, it looks if current class inherits from others classes up to the current instance others parents.
