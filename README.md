@@ -13,6 +13,7 @@
    1. [Private Methods](#pm)
    2. [Abstract Class](#ac)
    3. [\_\_slots\_\_](#slots)
+   4. [Multiple Inheritance](#mi)
 4. [Copy and Deepcopy](#cdc)
 5. [Parameter Passing and Inheritance](#ppi)
 6. [Basic Data Structures](#bds)
@@ -319,7 +320,7 @@ print(c.container)  # still implement parent's method
 >
 >['c', 'd']
 
-## Abstract Class <a name="ac"></a>
+## Abstract class <a name="ac"></a>
 An abstract class in Python is typically created to declare a set of methods that must be created in any child class built on top of this abstract class. Python has a module called abc (abstract base class) that offers the necessary tools for crafting an abstract base class. 
 
 ```python
@@ -378,6 +379,44 @@ Below, I list the pros and cons of using \_\_slots\_\_.
 * cons: You need to be clear about what you are doing and what you want to achieve with \_\_slots\_\_, especially when inheriting a class with it. The order of inheritance, the attribute names can make a huge difference in the performance.
 
 You can’t inherit a built-in type such as int, bytes, tuple with non-empty \_\_slots\_\_. Besides, you can’t assign a default value to attributes in \_\_slots\_\_. This is because these attributes are supposed to be descriptors. Instead, you can assign the default value in \_\_init\_\_().
+
+## Multiple inheritance <a name="mi"></a>
+When a class is derived from more than one base class it is called multiple Inheritance. The derived class inherits all the features of the base case. When some parents have the same function, we need an algorithm to iterate over them, which is name method resolution order (MRO) algorithm. 
+
+When a class inherits from multiple parents, Python build a list of classes to search for when it needs to resolve which method has to be called when one in invoked by an instance. This algorithm is a tree routing, and works this way, deep first, from left to right :
+1. Look if method exists in instance class
+2. If not, looks if it exists in its first parent, then in the parent of the parent and so on
+3. If not, it looks if current class inherits from others classes up to the current instance others parents.
+
+```python
+class Class1:
+    def m(self):
+        print("In Class1")
+
+class Class2(Class1):
+    def m(self):
+        print("In Class2")
+        super().m()
+
+class Class3(Class1):
+    def m(self):
+        print("In Class3")
+        super().m()
+
+class Class4(Class2, Class3):
+    def m(self):
+        print("In Class4")
+        super().m()
+
+print("MRO:", [x.__name__ for x in Class4.__mro__])
+obj = Class4()
+obj.m()
+```
+>MRO: ['Class4', 'Class2', 'Class3', 'Class1', 'object']
+>In Class4
+>In Class2
+>In Class3
+>In Class1
 
 # Copy and deepcopy <a name="cdc"></a>
 For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
