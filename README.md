@@ -424,6 +424,67 @@ A class is said as being a « good head » **if there is no other class in the t
 
 In the example above, the atucal searching path is "4 - 2 - 1 - 3 - 1". Since Class4 inherits from Class, Class1 is not searched the first time but after Class3 instead.
 
+**I am sorry, but it's not done yet!** Suppose we have the structure as follows:
+
+![image](https://user-images.githubusercontent.com/61017530/208073106-d8ca1955-82a8-4c8a-908a-2a898b57b38e.png)
+```python
+class X():
+    def who_am_i(self):
+        print("I am a X")
+    
+class Y():
+    def who_am_i(self):
+        print("I am a Y")
+    
+class A(X, Y):
+    def who_am_i(self):
+        print("I am a A")
+    
+class B(Y, X):
+     def who_am_i(self):
+         print("I am a B")
+
+class F (A, B):
+    def who_am_i(self):
+        print("I am a F")
+```
+In Python2, it run successfully, with the search path as F, A, X, Y, B
+>I am a F
+
+**However, in Python3, it raises TypeError.** The path should be F, A, B, Y, X regarding the explanations above.
+>TypeError: Cannot create a consistent method resolution 
+>order (MRO) for bases C, B 
+
+**The algorithm described before for Python 3 is not exactly the real one.** Here is the definition of linearization algorithm used to defined the search path.
+The linearization of a class C is the sum of C plus the merge of the linearizations of the parents and the list of the parents. In symbolic notation:
+- L[C(B1 ... BN)] = C + merge(L[B1] ... L[BN], B1 ... BN)
+
+So in our case L[F(A, B)] = F + merge(L[A], L[B], A, B)
+
+And the algorithm to merge linearized lists is:
+
+**1. Take the head of the first list, i.e L[B1][0].**
+
+**2. If this head is not in the tail of any of the other lists, then add it to the linearization of C and remove it from the lists in the merge. Otherwise look at the head of the next list and take it.**
+
+**3. If it is a good head. Then repeat the operation until all the class are removed or it is impossible to find good heads.**
+
+
+In this case, it is impossible to construct the merge, Python 2.3 will refuse to create the class C and will raise an exception.
+
+L[A(X,Y)] = **A + merge(L[X], L[Y], X, Y) = A, X, Y**
+
+L[B(Y,X)] = **B + merge(L[Y], L[X], Y, X) = B, Y, X**
+
+So, L[F(A,B)] = **F + merge( (A, X, Y) + (B, Y, X), A, B).**
+
+So, applying the algorithm, A is a good head, so we keep it : L[F(A,B)] = **F, A + merge( (X, Y) + (B, Y, X), B).**
+
+So applaying the algorithm, X is not a good head as it appears **in the tail of (B, Y, X)**, so we skip it and continue with next list to merge:**(B, Y, X)**. B is a good head, so we keep it : L[F(A,B)] = **F, A, B + merge( (X, Y) + (Y, X))**
+
+So, applying the algorithm X is not a good head as it appears in the tail of (Y, X) so we skip it and jump to (Y, X). Y is not a good head too as it appears in the head of (X, Y). **So we continue to the next list. But there is no other. Thus, Python 3 cannot linearize the class F to build the MRO and raise the exception!**
+
+
 # Copy and deepcopy <a name="cdc"></a>
 For primitive types, copy equals to deepcopy. As for reference types, copy inserts references while deepcopy constructs a new compound object. 
 
